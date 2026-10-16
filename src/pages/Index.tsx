@@ -31,7 +31,7 @@ const Index = () => {
       const distance = targetPosition - startPosition;
 
       let startTime: number;
-      const duration = 40000; // 30 ثانية
+      const duration = 50000; // 30 ثانية
 
       const animation = () => {
         const elapsed = Date.now() - startTime;
@@ -56,7 +56,7 @@ const Index = () => {
       setTimeout(() => {
         startTime = Date.now();
         requestAnimationFrame(animation);
-      }, 3000);
+      }, 5000);
     }
   }, [opened]);
 
