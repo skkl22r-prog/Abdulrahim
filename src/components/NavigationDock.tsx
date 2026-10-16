@@ -176,7 +176,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
     ctx.shadowBlur = 10;
 
     ctx.fillText(
-      "عبـداللّٰه & ريمـان",
+      "ابراهيـم & نســورا",
       canvas.width / 2,
       canvas.height - 150
     );
@@ -216,7 +216,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
       ) {
         await navigator.share({
           files: [file],
-          title: "تهـاني & يحـيى",
+          title: "ابراهيـم & نســورا",
         });
       } else {
         alert(
@@ -439,7 +439,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                       }}
                       className="text-3xl font-bold"
                     >
-                      تهـاني & يحـيى
+                      ابراهيـم & نســورا
                     </p>
                   </div>
                 </div>
@@ -979,7 +979,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
           <button
             onClick={() => {
               window.location.href =
-                "https://www.google.com/maps/search/?api=1&query=قاعة+الرون+العدايا";
+                "https://www.google.com/maps/search/?api=1&query=قاعة+سما+للأفراح+والمناسبات+المذنب";
             }}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
           >
