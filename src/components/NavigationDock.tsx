@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import {
+  Camera,
   Music,
   MapPin,
   Heart,
   X,
+  Download,
+  RefreshCw,
+  Share2,
   Check,
   Send,
 } from "lucide-react";
@@ -24,6 +28,8 @@ type RSVPState =
 
 const NavigationDock = ({ active }: NavigationDockProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [showCamera, setShowCamera] = useState(false);
+  const [capturedImage, setCapturedImage] = useState<string | null>(null);
 
   // ===== RSVP =====
   const [showRSVP, setShowRSVP] = useState(false);
@@ -37,6 +43,9 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
 
   // =========================================================
   // تشغيل الموسيقى تلقائياً فور فتح الظرف
@@ -66,6 +75,159 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
         .play()
         .then(() => setIsPlaying(true))
         .catch(() => setIsPlaying(false));
+    }
+  };
+
+  // =========================================================
+  // فتح الكاميرا
+  // =========================================================
+  const openCamera = async () => {
+    try {
+      setShowCamera(true);
+      setCapturedImage(null);
+
+      const mediaStream =
+        await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: "environment" },
+          },
+          audio: false,
+        });
+
+      setStream(mediaStream);
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+      }
+    } catch (err) {
+      alert("يرجى السماح للمتصفح بالوصول إلى الكاميرا.");
+      setShowCamera(false);
+    }
+  };
+
+  // =========================================================
+  // إغلاق الكاميرا
+  // =========================================================
+  const closeCamera = () => {
+    if (stream) {
+      stream.getTracks().forEach((track) => track.stop());
+    }
+
+    setStream(null);
+    setShowCamera(false);
+    setCapturedImage(null);
+  };
+
+  // =========================================================
+  // التقاط الصورة
+  // =========================================================
+  const capturePhoto = () => {
+    if (!videoRef.current || !canvasRef.current) return;
+
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+
+    if (!ctx) return;
+
+    canvas.width = 1080;
+    canvas.height = 1920;
+
+    const vRatio =
+      video.videoWidth / video.videoHeight || 9 / 16;
+
+    const cRatio = canvas.width / canvas.height;
+
+    let renderWidth = canvas.width;
+    let renderHeight = canvas.height;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    if (vRatio > cRatio) {
+      renderWidth = canvas.height * vRatio;
+      offsetX = (canvas.width - renderWidth) / 2;
+    } else {
+      renderHeight = canvas.width / vRatio;
+      offsetY = (canvas.height - renderHeight) / 2;
+    }
+
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
+
+    ctx.drawImage(
+      video,
+      offsetX,
+      offsetY,
+      renderWidth,
+      renderHeight
+    );
+
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 52px IranNastaliq";
+
+    ctx.shadowColor = "rgba(0,0,0,0.45)";
+    ctx.shadowBlur = 10;
+
+    ctx.fillText(
+      "عبـداللّٰه & ريمـان",
+      canvas.width / 2,
+      canvas.height - 150
+    );
+
+    ctx.shadowColor = "transparent";
+    ctx.shadowBlur = 0;
+
+    const imageUrl = canvas.toDataURL("image/png");
+
+    setCapturedImage(imageUrl);
+  };
+
+  // =========================================================
+  // مشاركة الصورة
+  // =========================================================
+  const handleShare = async () => {
+    if (!capturedImage) return;
+
+    try {
+      const response = await fetch(capturedImage);
+      const blob = await response.blob();
+
+      const file = new File(
+        [blob],
+        "wedding-filter.png",
+        {
+          type: "image/png",
+        }
+      );
+
+      if (
+        navigator.share &&
+        navigator.canShare &&
+        navigator.canShare({
+          files: [file],
+        })
+      ) {
+        await navigator.share({
+          files: [file],
+          title: "تهـاني & يحـيى",
+        });
+      } else {
+        alert(
+          "المشاركة غير مدعومة مباشرة على هذا المتصفح، يمكنك استخدام زر الحفظ."
+        );
+      }
+    } catch (error) {
+      console.log(
+        "إلغاء المشاركة أو خطأ:",
+        error
+      );
     }
   };
 
@@ -239,6 +401,123 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
         src={bgMusic}
         preload="auto"
       />
+
+      <canvas
+        ref={canvasRef}
+        className="hidden"
+      />
+
+      {/* =====================================================
+          شاشة الكاميرا والفلتر
+      ====================================================== */}
+      {showCamera && (
+        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
+          <div className="relative w-full h-full max-w-[500px] aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
+
+            <button
+              onClick={closeCamera}
+              className="absolute top-6 right-6 z-30 p-2.5 rounded-full bg-black/40 text-white border border-white/20 backdrop-blur-md cursor-pointer"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {!capturedImage ? (
+              <>
+                <video
+                  ref={videoRef}
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-cover scale-100"
+                />
+
+                <div className="absolute inset-0 pointer-events-none flex flex-col justify-end p-6 text-center bg-gradient-to-t from-black/80 via-black/25 to-transparent">
+                  <div className="pb-16 flex flex-col items-center gap-1.5 text-white drop-shadow-2xl">
+                    <p
+                      style={{
+                        fontFamily:
+                          "'IranNastaliq', sans-serif",
+                      }}
+                      className="text-3xl font-bold"
+                    >
+                      تهـاني & يحـيى
+                    </p>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-6 z-20">
+                  <button
+                    onClick={capturePhoto}
+                    className="w-20 h-20 rounded-full border-4 border-white/80 bg-white/20 flex items-center justify-center cursor-pointer active:scale-95 transition-transform backdrop-blur-sm"
+                  >
+                    <div className="w-16 h-16 rounded-full bg-white shadow-xl" />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="relative w-full h-full flex flex-col items-center justify-center">
+
+                <img
+                  src={capturedImage}
+                  alt="الصورة الملتقطة"
+                  className="w-full h-full object-cover"
+                />
+
+                <div className="absolute bottom-6 z-30 w-[90%] max-w-[360px]">
+                  <div
+                    className="w-full p-4 rounded-3xl backdrop-blur-xl border border-white/30 flex flex-col items-center gap-3 shadow-2xl"
+                    style={{
+                      background:
+                        "rgba(35, 28, 23, 0.82)",
+                    }}
+                  >
+                    <div className="w-full flex items-center justify-center gap-3">
+
+                      <a
+                        href={capturedImage}
+                        download="mohammed-ahood.png"
+                        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/20 text-white font-arabic text-sm font-semibold transition-all active:scale-95"
+                        style={{
+                          background:
+                            "rgba(255, 255, 255, 0.12)",
+                        }}
+                      >
+                        <Download className="w-4 h-4" />
+                        حفظ
+                      </a>
+
+                      <button
+                        onClick={() =>
+                          setCapturedImage(null)
+                        }
+                        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/20 text-white font-arabic text-sm font-semibold transition-all active:scale-95 cursor-pointer"
+                        style={{
+                          background:
+                            "rgba(255, 255, 255, 0.12)",
+                        }}
+                      >
+                        <RefreshCw className="w-4 h-4" />
+                        إعادة
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={handleShare}
+                      className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-arabic text-sm font-bold shadow-lg transition-all active:scale-95 cursor-pointer"
+                      style={{
+                        backgroundColor: "#8C7A6B",
+                        color: "#FFFFFF",
+                      }}
+                    >
+                      <Share2 className="w-4 h-4" />
+                      مشاركة
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* =====================================================
           نافذة تأكيد الحضور
@@ -657,11 +936,12 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </span>
           </button>
 
-          {/* 2. كاميرا (زر عادي) */}
+          {/* 2. كاميرا (تعمل وتفتح الكاميرا) */}
           <button
+            onClick={openCamera}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
           >
-            <Heart
+            <Camera
               className="w-5 h-5"
               style={{
                 color: "#5F4F41",
@@ -678,15 +958,20 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </span>
           </button>
 
-          {/* 3. الدائرة البنية في المنتصف بداخلها ايموجي قلب منظر فقط */}
+          {/* 3. الدائرة البنية في المنتصف بداخلها قلب أبيض كرمز (منظر فقط بدون تأثير) */}
           <div className="relative -top-2 flex flex-col items-center justify-center pointer-events-none">
             <div
-              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/40 text-lg"
+              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/40"
               style={{
                 background: "#5F4F41",
               }}
             >
-              ❤️
+              <svg
+                className="w-6 h-6 fill-white text-white"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+              </svg>
             </div>
           </div>
 
