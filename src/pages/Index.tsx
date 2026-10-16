@@ -154,35 +154,29 @@ const Index = () => {
                 className="font-arabic text-base sm:text-lg opacity-90 pb-2"
                 style={{ color: "#5F4F41" }}
               >
-                نتشرف بدعوتكم لحضور حفل زفاف
+                تتـــشرف
               </p>
 
-              {/* أم طارق */}
-            {/*   <div
-                className="flex items-center justify-center gap-1 text-lg sm:text-xl font-bold py-2"
-                style={{ color: "#5F4F41" }}
+              {/* زينب الحايك & فاطمة الدويرج */}
+              <div
+                className="flex items-center justify-center gap-3 text-lg sm:text-xl font-bold py-2"
+                style={{ color: "#5F4F41", fontFamily: "'Almarai', sans-serif" }}
               >
-                <span
-                  style={{
-                    fontFamily:
-                      "'Almarai', sans-serif",
-                  }}
-                >
-                  أم طـارق
-                </span>
-              </div> */}
+                <span>زينب الحايك</span>
+                <span className="text-base font-normal">&</span>
+                <span>فاطمة الدويرج</span>
+              </div> 
 
               {/* السطر السادس */}
-         {/*      <p
+             <p
                 className="font-arabic text-sm sm:text-base pt-2"
                 style={{ color: "#5F4F41" }}
               >
-                بدعوتكم لحضور حفل زواج أبنها
+                بدعوتكم لحضور حفل زفاف
               </p>
-{/* 
-              {/* مسافة {/* 
-          {/*    <div className="h-6"></div>
-*/}
+              
+              {/* مسافة */}
+        <div className="h-6"></div>
               {/* طارق & كادي */}
               <div className="pt-8 pb-2 flex items-center justify-center gap-2">
 
@@ -194,7 +188,7 @@ const Index = () => {
                     color: "#5F4F41",
                   }}
                 >
-                  تهـاني
+                  ابراهيـم
                 </span>
 
                 <span
@@ -216,7 +210,7 @@ const Index = () => {
                     color: "#5F4F41",
                   }}
                 >
-                  يحـيى
+                  نســـورا
                 </span>
 
               </div>
@@ -238,14 +232,14 @@ const Index = () => {
     className="font-arabic text-base sm:text-lg font-semibold"
     style={{ color: "#5F4F41" }}
   >
-    قاعـة الرون
+    قاعـة سما للأفراح والمناسبات
   </p>
 
   <p
     className="font-arabic text-sm sm:text-base font-medium opacity-90"
     style={{ color: "#5F4F41" }}
   >
-    صبيا العدايا
+    المذنب
   </p>
 </div>
 
@@ -268,10 +262,10 @@ const Index = () => {
                     color: "#FFFFFF",
                   }}
                 >
-                  <span>الجمعة</span>
+                  <span>الاثنين</span>
 
                   <span className="text-sm font-extrabold">
-                    سبتمبر
+                    نوفمبر
                   </span>
 
                   <span className="font-display">
@@ -285,21 +279,21 @@ const Index = () => {
                     className="font-display text-4xl font-extrabold tracking-tight"
                     style={{ color: "#5F4F41" }}
                   >
-                    18
+                    23
                   </div>
 
                   <div
                     className="font-arabic text-sm font-bold"
                     style={{ color: "#5F4F41" }}
                   >
-                    الجمعة
+                    الاثنين
                   </div>
 
                   <div
                     className="font-arabic text-xs font-semibold opacity-80"
                     style={{ color: "#5F4F41" }}
                   >
-                    7 . 4 . 1448 هـ
+                    13 . 6 . 1448 هـ
                   </div>
 
                 </div>
@@ -402,7 +396,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    تهـاني
+                    ابراهيـم
                   </span>
 
                   <span
@@ -424,7 +418,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    يحـيى
+                    نســـورا
                   </span>
 
                 </div>
