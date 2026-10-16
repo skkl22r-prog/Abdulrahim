@@ -1,14 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import {
-  Phone,
   Music,
-  Camera,
   MapPin,
   Heart,
   X,
-  Download,
-  RefreshCw,
-  Share2,
   Check,
   Send,
 } from "lucide-react";
@@ -29,11 +24,6 @@ type RSVPState =
 
 const NavigationDock = ({ active }: NavigationDockProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showCamera, setShowCamera] = useState(false);
-  const [capturedImage, setCapturedImage] = useState<string | null>(null);
-
-  // ===== نافذة التواصل =====
-  const [showContact, setShowContact] = useState(false);
 
   // ===== RSVP =====
   const [showRSVP, setShowRSVP] = useState(false);
@@ -47,9 +37,6 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
   });
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [stream, setStream] = useState<MediaStream | null>(null);
 
   // =========================================================
   // تشغيل الموسيقى تلقائياً فور فتح الظرف
@@ -80,173 +67,6 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
         .then(() => setIsPlaying(true))
         .catch(() => setIsPlaying(false));
     }
-  };
-
-  // =========================================================
-  // فتح الكاميرا
-  // =========================================================
-  const openCamera = async () => {
-    try {
-      setShowCamera(true);
-      setCapturedImage(null);
-
-      const mediaStream =
-        await navigator.mediaDevices.getUserMedia({
-          video: {
-            facingMode: { ideal: "environment" },
-          },
-          audio: false,
-        });
-
-      setStream(mediaStream);
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
-    } catch (err) {
-      alert("يرجى السماح للمتصفح بالوصول إلى الكاميرا.");
-      setShowCamera(false);
-    }
-  };
-
-  // =========================================================
-  // إغلاق الكاميرا
-  // =========================================================
-  const closeCamera = () => {
-    if (stream) {
-      stream.getTracks().forEach((track) => track.stop());
-    }
-
-    setStream(null);
-    setShowCamera(false);
-    setCapturedImage(null);
-  };
-
-  // =========================================================
-  // التقاط الصورة
-  // =========================================================
-  const capturePhoto = () => {
-    if (!videoRef.current || !canvasRef.current) return;
-
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    if (!ctx) return;
-
-    canvas.width = 1080;
-    canvas.height = 1920;
-
-    const vRatio =
-      video.videoWidth / video.videoHeight || 9 / 16;
-
-    const cRatio = canvas.width / canvas.height;
-
-    let renderWidth = canvas.width;
-    let renderHeight = canvas.height;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    if (vRatio > cRatio) {
-      renderWidth = canvas.height * vRatio;
-      offsetX = (canvas.width - renderWidth) / 2;
-    } else {
-      renderHeight = canvas.width / vRatio;
-      offsetY = (canvas.height - renderHeight) / 2;
-    }
-
-    ctx.fillStyle = "#000000";
-    ctx.fillRect(
-      0,
-      0,
-      canvas.width,
-      canvas.height
-    );
-
-    ctx.drawImage(
-      video,
-      offsetX,
-      offsetY,
-      renderWidth,
-      renderHeight
-    );
-
-    ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 52px IranNastaliq";
-
-    ctx.shadowColor = "rgba(0,0,0,0.45)";
-    ctx.shadowBlur = 10;
-
-    ctx.fillText(
-      "عبـداللّٰه & ريمـان",
-      canvas.width / 2,
-      canvas.height - 150
-    );
-
-    ctx.shadowColor = "transparent";
-    ctx.shadowBlur = 0;
-
-    const imageUrl = canvas.toDataURL("image/png");
-
-    setCapturedImage(imageUrl);
-  };
-
-  // =========================================================
-  // مشاركة الصورة
-  // =========================================================
-  const handleShare = async () => {
-    if (!capturedImage) return;
-
-    try {
-      const response = await fetch(capturedImage);
-      const blob = await response.blob();
-
-      const file = new File(
-        [blob],
-        "wedding-filter.png",
-        {
-          type: "image/png",
-        }
-      );
-
-      if (
-        navigator.share &&
-        navigator.canShare &&
-        navigator.canShare({
-          files: [file],
-        })
-      ) {
-        await navigator.share({
-          files: [file],
-          title: "تهـاني & يحـيى",
-        });
-      } else {
-        alert(
-          "المشاركة غير مدعومة مباشرة على هذا المتصفح، يمكنك استخدام زر الحفظ."
-        );
-      }
-    } catch (error) {
-      console.log(
-        "إلغاء المشاركة أو خطأ:",
-        error
-      );
-    }
-  };
-
-  // =========================================================
-  // فتح نافذة التواصل
-  // =========================================================
-  const openContact = () => {
-    setShowContact(true);
-  };
-
-  // =========================================================
-  // الاتصال
-  // =========================================================
-  const handlePhoneClick = () => {
-    window.location.href = "tel:0509555821";
   };
 
   // =========================================================
@@ -304,7 +124,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
   };
 
   // =========================================================
-  // إرسال RSVP إلى Google Forms فقط
+  // إرسال RSVP إلى Google Forms الجديد
   // =========================================================
   const submitRSVP = async () => {
     if (!guestName.trim() || !rsvpStatus) {
@@ -339,7 +159,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
       form.method = "POST";
 
       form.action =
-        "https://docs.google.com/forms/d/e/1FAIpQLSeuLeGI-2hAr4g_U6Co1tp6ZpSltJCgQMAxhgtCN07gwkJTkw/formResponse";
+        "https://docs.google.com/forms/d/e/1FAIpQLScH4vAu0Y2JeSrDNm33Akhve4A4VM_Da8-D1XytHwQa_AWJyA/formResponse";
 
       form.target = "hidden_google_form";
 
@@ -349,14 +169,14 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
         document.createElement("input");
 
       nameInput.type = "hidden";
-      nameInput.name = "entry.86988323";
+      nameInput.name = "entry.691751462";
       nameInput.value = finalName;
 
       const statusInput =
         document.createElement("input");
 
       statusInput.type = "hidden";
-      statusInput.name = "entry.367131422";
+      statusInput.name = "entry.964082129";
 
       statusInput.value =
         rsvpStatus === "attending"
@@ -419,244 +239,6 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
         src={bgMusic}
         preload="auto"
       />
-
-      <canvas
-        ref={canvasRef}
-        className="hidden"
-      />
-
-      {/* =====================================================
-          شاشة الكاميرا والفلتر
-      ====================================================== */}
-      {showCamera && (
-        <div className="fixed inset-0 z-50 bg-black flex items-center justify-center">
-          <div className="relative w-full h-full max-w-[500px] aspect-[9/16] bg-black flex items-center justify-center overflow-hidden">
-
-            <button
-              onClick={closeCamera}
-              className="absolute top-6 right-6 z-30 p-2.5 rounded-full bg-black/40 text-white border border-white/20 backdrop-blur-md cursor-pointer"
-            >
-              <X className="w-6 h-6" />
-            </button>
-
-            {!capturedImage ? (
-              <>
-                <video
-                  ref={videoRef}
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-cover scale-100"
-                />
-
-                <div className="absolute inset-0 pointer-events-none flex flex-col justify-end p-6 text-center bg-gradient-to-t from-black/80 via-black/25 to-transparent">
-                  <div className="pb-16 flex flex-col items-center gap-1.5 text-white drop-shadow-2xl">
-                    <p
-                      style={{
-                        fontFamily:
-                          "'IranNastaliq', sans-serif",
-                      }}
-                      className="text-3xl font-bold"
-                    >
-                      تهـاني & يحـيى
-                    </p>
-                  </div>
-                </div>
-
-                <div className="absolute bottom-6 z-20">
-                  <button
-                    onClick={capturePhoto}
-                    className="w-20 h-20 rounded-full border-4 border-white/80 bg-white/20 flex items-center justify-center cursor-pointer active:scale-95 transition-transform backdrop-blur-sm"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-white shadow-xl" />
-                  </button>
-                </div>
-              </>
-            ) : (
-              <div className="relative w-full h-full flex flex-col items-center justify-center">
-
-                <img
-                  src={capturedImage}
-                  alt="الصورة الملتقطة"
-                  className="w-full h-full object-cover"
-                />
-
-                <div className="absolute bottom-6 z-30 w-[90%] max-w-[360px]">
-                  <div
-                    className="w-full p-4 rounded-3xl backdrop-blur-xl border border-white/30 flex flex-col items-center gap-3 shadow-2xl"
-                    style={{
-                      background:
-                        "rgba(35, 28, 23, 0.82)",
-                    }}
-                  >
-                    <div className="w-full flex items-center justify-center gap-3">
-
-                      <a
-                        href={capturedImage}
-                        download="mohammed-ahood.png"
-                        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/20 text-white font-arabic text-sm font-semibold transition-all active:scale-95"
-                        style={{
-                          background:
-                            "rgba(255, 255, 255, 0.12)",
-                        }}
-                      >
-                        <Download className="w-4 h-4" />
-                        حفظ
-                      </a>
-
-                      <button
-                        onClick={() =>
-                          setCapturedImage(null)
-                        }
-                        className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/20 text-white font-arabic text-sm font-semibold transition-all active:scale-95 cursor-pointer"
-                        style={{
-                          background:
-                            "rgba(255, 255, 255, 0.12)",
-                        }}
-                      >
-                        <RefreshCw className="w-4 h-4" />
-                        إعادة
-                      </button>
-                    </div>
-
-                    <button
-                      onClick={handleShare}
-                      className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-xl font-arabic text-sm font-bold shadow-lg transition-all active:scale-95 cursor-pointer"
-                      style={{
-                        backgroundColor: "#8C7A6B",
-                        color: "#FFFFFF",
-                      }}
-                    >
-                      <Share2 className="w-4 h-4" />
-                      مشاركة
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* =====================================================
-          نافذة التواصل
-      ====================================================== */}
-      {showContact && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-5">
-
-          {/* الخلفية */}
-          <div
-            className="absolute inset-0 bg-black/25 backdrop-blur-md"
-            onClick={() =>
-              setShowContact(false)
-            }
-          />
-
-          {/* المربع */}
-          <div
-            className="relative w-full max-w-[380px] rounded-[32px] px-7 py-8 shadow-2xl border border-white/30"
-            style={{
-              background:
-                "rgba(245, 239, 231, 0.96)",
-              color: "#5F4F41",
-            }}
-          >
-
-            {/* زخرفة الركن العلوي */}
-            <div className="absolute top-3 right-4 text-xl opacity-60">
-              ❈
-            </div>
-
-            <div className="absolute top-3 left-4 text-xl opacity-60">
-              ❈
-            </div>
-
-            {/* المحتوى */}
-            <div className="text-center py-5">
-
-              <Phone
-                className="mx-auto w-10 h-10 mb-4"
-                style={{
-                  color: "#5F4F41",
-                }}
-              />
-
-              <h2
-                className="text-2xl font-bold mb-3"
-                style={{
-                  fontFamily:
-                    "'IranNastaliq', sans-serif",
-                }}
-              >
-                للتواصل
-              </h2>
-
-              <p
-                className="text-sm leading-8 mb-2"
-                style={{
-                  fontFamily:
-                    "'Almarai', sans-serif",
-                }}
-              >
- 
-              </p>
-
-              <p
-                className="text-lg font-bold mb-6"
-                dir="ltr"
-                style={{
-                  fontFamily:
-                    "'Almarai', sans-serif",
-                }}
-              >
- 0509555821
-              </p>
-
-              {/* زر الاتصال البني */}
-              <button
-                type="button"
-                onClick={handlePhoneClick}
-                className="w-full py-3.5 rounded-2xl font-bold flex items-center justify-center gap-2 active:scale-95 transition-all"
-                style={{
-                  fontFamily:
-                    "'Almarai', sans-serif",
-                  background: "#5F4F41",
-                  color: "#FFFFFF",
-                }}
-              >
-                <Phone className="w-4 h-4" />
-                اتصال
-              </button>
-
-              {/* إلغاء */}
-              <button
-                type="button"
-                onClick={() =>
-                  setShowContact(false)
-                }
-                className="w-full mt-3 py-2 text-sm"
-                style={{
-                  fontFamily:
-                    "'Almarai', sans-serif",
-                  color: "#5F4F41",
-                }}
-              >
-                إلغاء
-              </button>
-
-            </div>
-
-            {/* زخارف سفلية */}
-            <div className="absolute bottom-3 right-4 text-xl opacity-60">
-              ❈
-            </div>
-
-            <div className="absolute bottom-3 left-4 text-xl opacity-60">
-              ❈
-            </div>
-
-          </div>
-        </div>
-      )}
 
       {/* =====================================================
           نافذة تأكيد الحضور
@@ -1049,29 +631,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
           }}
         >
 
-          {/* 1. تواصل */}
-          <button
-            onClick={openContact}
-            className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
-          >
-            <Phone
-              className="w-5 h-5"
-              style={{
-                color: "#5F4F41",
-              }}
-            />
-
-            <span
-              className="font-arabic text-[11px] font-bold"
-              style={{
-                color: "#5F4F41",
-              }}
-            >
-              تواصل
-            </span>
-          </button>
-
-          {/* 2. موسيقى */}
+          {/* 1. موسيقى */}
           <button
             onClick={toggleMusic}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
@@ -1097,27 +657,44 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </span>
           </button>
 
-          {/* 3. الكاميرا */}
+          {/* 2. كاميرا (زر عادي) */}
           <button
-            onClick={openCamera}
-            className="relative -top-2 flex flex-col items-center justify-center cursor-pointer transition-transform active:scale-95"
+            className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
           >
-            <div
-              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/40"
+            <Heart
+              className="w-5 h-5"
               style={{
-                background:
-                  "#5F4F41",
+                color: "#5F4F41",
+              }}
+            />
+
+            <span
+              className="font-arabic text-[11px] font-bold"
+              style={{
+                color: "#5F4F41",
               }}
             >
-              <Camera className="w-6 h-6 text-white" />
-            </div>
+              كاميرا
+            </span>
           </button>
+
+          {/* 3. الدائرة البنية في المنتصف بداخلها ايموجي قلب منظر فقط */}
+          <div className="relative -top-2 flex flex-col items-center justify-center pointer-events-none">
+            <div
+              className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/40 text-lg"
+              style={{
+                background: "#5F4F41",
+              }}
+            >
+              ❤️
+            </div>
+          </div>
 
           {/* 4. الموقع */}
           <button
             onClick={() => {
               window.location.href =
-  "https://www.google.com/maps/search/?api=1&query=قاعة+الرون+العدايا";
+                "https://www.google.com/maps/search/?api=1&query=قاعة+الرون+العدايا";
             }}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
           >
