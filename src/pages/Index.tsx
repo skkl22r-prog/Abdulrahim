@@ -109,7 +109,7 @@ const Index = () => {
           <div className="relative z-10 w-full flex flex-col items-center pt-20 sm:pt-32 px-4 space-y-6">
 
             <div
-              className="w-[92%] max-w-md p-5 sm:p-7 rounded-3xl text-center backdrop-blur-md border border-white/50 shadow-2xl space-y-2 pb-10"
+              className="w-[92%] max-w-md p-5 sm:p-7 rounded-3xl text-center backdrop-blur-md border border-white/50 shadow-2xl space-y-2.5 pb-8"
               style={{
                 background:
                   "rgba(233, 221, 212, 0.85)",
@@ -151,41 +151,21 @@ const Index = () => {
               </p>
 
               <p
-                className="font-arabic text-base sm:text-lg opacity-90"
+                className="font-arabic text-base sm:text-lg opacity-90 pb-1"
                 style={{ color: "#5F4F41" }}
               >
                 تتـــشرف
               </p>
 
-              {/* زينب الحايك */}
+              {/* زينب الحايك & فاطمة الدويرج */}
               <div
-                className="flex items-center justify-center gap-1 text-lg sm:text-xl font-bold pt-1"
-                style={{ color: "#5F4F41" }}
+                className="flex items-center justify-center gap-3 text-lg sm:text-xl font-bold py-1"
+                style={{ color: "#5F4F41", fontFamily: "'Almarai', sans-serif" }}
               >
-                <span
-                  style={{
-                    fontFamily:
-                      "'Almarai', sans-serif",
-                  }}
-                >
-                  زينب الحايك
-                </span>
+                <span>زينب الحايك</span>
+                <span className="text-base font-normal">&</span>
+                <span>فاطمة الدويرج</span>
               </div> 
-
-              {/* فاطمة الدويرج */}
-              <div
-                className="flex items-center justify-center gap-1 text-lg sm:text-xl font-bold pb-1"
-                style={{ color: "#5F4F41" }}
-              >
-                <span
-                  style={{
-                    fontFamily:
-                      "'Almarai', sans-serif",
-                  }}
-                >
-                  فاطمة الدويرج
-                </span>
-              </div>
 
               {/* السطر السادس */}
              <p
@@ -195,10 +175,10 @@ const Index = () => {
                 بدعوتكم لحضور حفل زفاف
               </p>
               
-              {/* مسافة صغيرة للتقريب من السطر العلوي */}
-              <div className="h-1"></div>
+              {/* مسافة بين السطرين لإبعاد أسماء العرسان قليلاً إلى الأسفل */}
+              <div className="h-4"></div>
 
-              {/* طارق & كادي (تم رفعها للأعلى قليلاً مع مسافة مناسبة عن نهاية المربع) */}
+              {/* طارق & كادي */}
               <div className="pt-2 pb-2 flex items-center justify-center gap-2">
 
                 <span
