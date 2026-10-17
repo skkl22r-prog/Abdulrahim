@@ -3,8 +3,8 @@ import { Heart, Calendar } from "lucide-react";
 import invitationImg from "@/assets/La.jpeg";
 import sosImg from "@/assets/Rn.jpeg";
 
-import footerBgImg from "@/assets/IMG_8468.jpeg";
-import cardImg from "@/assets/IMG_5716.jpeg";
+import footerBgImg from "@/assets/96AF05E8-7D83-48B7-B124-4763797873E0.png";
+import cardImg from "@/assets/IMG_8468.jpeg";
 
 import Envelope from "@/components/Envelope";
 import SprayParticles from "@/components/SprayParticles";
