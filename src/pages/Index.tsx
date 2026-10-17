@@ -147,7 +147,7 @@ const Index = () => {
                 className="text-sm sm:text-base opacity-90"
                 style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
               >
-                وسرور هذا اليـــــــــوم مختلف
+                وسرور هذا اليــــــــوم مختلف
               </p>
 
               <p
@@ -207,7 +207,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    عبدالرحيم
+                    عبـدالرحيم
                   </span>
                   <span
                     className="text-sm sm:text-base mt-1"
@@ -238,7 +238,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    لُجين
+                    لُجيـن
                   </span>
                   <span
                     className="text-sm sm:text-base mt-1"
@@ -270,14 +270,14 @@ const Index = () => {
                 className="font-arabic text-base sm:text-lg font-semibold"
                 style={{ color: "#5F4F41" }}
               >
-                قاعـة سما للأفراح والمناسبات
+                قاعـة مون لايت
               </p>
 
               <p
                 className="font-arabic text-sm sm:text-base font-medium opacity-90"
                 style={{ color: "#5F4F41" }}
               >
-                المذنب
+                جدة
               </p>
             </div>
 
@@ -300,10 +300,10 @@ const Index = () => {
                     color: "#FFFFFF",
                   }}
                 >
-                  <span>الاثنين</span>
+                  <span>الثلاثاء</span>
 
                   <span className="text-sm font-extrabold">
-                    نوفمبر
+                    ديسمبر
                   </span>
 
                   <span className="font-display">
@@ -317,21 +317,21 @@ const Index = () => {
                     className="font-display text-4xl font-extrabold tracking-tight"
                     style={{ color: "#5F4F41" }}
                   >
-                    23
+                    8
                   </div>
 
                   <div
                     className="font-arabic text-sm font-bold"
                     style={{ color: "#5F4F41" }}
                   >
-                    الاثنين
+                    الثلاثاء
                   </div>
 
                   <div
                     className="font-arabic text-xs font-semibold opacity-80"
                     style={{ color: "#5F4F41" }}
                   >
-                    13 . 6 . 1448 هـ
+                    28 . 6 . 1448 هـ
                   </div>
 
                 </div>
@@ -434,7 +434,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    عبدالرحيم
+                    عبـدالرحيم
                   </span>
 
                   <span
@@ -456,7 +456,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    لُجين
+                    لُجيـن
                   </span>
 
                 </div>
