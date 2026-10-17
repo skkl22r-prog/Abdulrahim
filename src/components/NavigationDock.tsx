@@ -321,7 +321,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
       form.method = "POST";
 
       form.action =
-        "https://docs.google.com/forms/d/e/1FAIpQLScH4vAu0Y2JeSrDNm33Akhve4A4VM_Da8-D1XytHwQa_AWJyA/formResponse";
+        "https://docs.google.com/forms/d/e/1FAIpQLSfCTVkqKySEXLexj8lHidS3fE8Q87ejVuvpzn5t9Z5FsZFClw/formResponse";
 
       form.target = "hidden_google_form";
 
@@ -331,14 +331,14 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
         document.createElement("input");
 
       nameInput.type = "hidden";
-      nameInput.name = "entry.691751462";
+      nameInput.name = "entry.513461549";
       nameInput.value = finalName;
 
       const statusInput =
         document.createElement("input");
 
       statusInput.type = "hidden";
-      statusInput.name = "entry.964082129";
+      statusInput.name = "entry.1832922715";
 
       statusInput.value =
         rsvpStatus === "attending"
@@ -979,7 +979,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
           <button
             onClick={() => {
               window.location.href =
-                "https://www.google.com/maps/search/?api=1&query=قاعة+سما+للأفراح+والمناسبات+المذنب";
+                "https://maps.app.goo.gl/mZBWyUcMKVx184hg6?g_st=iw";
             }}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
           >
