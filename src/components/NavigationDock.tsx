@@ -176,7 +176,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
     ctx.shadowBlur = 10;
 
     ctx.fillText(
-      "ابراهيـم & نســورا",
+      "إبراهيـم & نســورا",
       canvas.width / 2,
       canvas.height - 150
     );
@@ -439,7 +439,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                       }}
                       className="text-3xl font-bold"
                     >
-                      ابراهيـم & نســورا
+                      إبراهيـم & نســورا
                     </p>
                   </div>
                 </div>
