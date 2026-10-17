@@ -189,7 +189,7 @@ const Index = () => {
                     color: "#5F4F41",
                   }}
                 >
-                  ابراهيـم
+                  إبراهيـم
                 </span>
 
                 <span
@@ -397,7 +397,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    ابراهيـم
+                    إبراهيـم
                   </span>
 
                   <span
