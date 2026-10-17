@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import waxSealImg from "@/assets/K.png";
+import waxSealImg from "@/assets/inn.png";
 
 interface EnvelopeProps {
   onOpen: () => void;
