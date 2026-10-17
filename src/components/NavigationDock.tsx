@@ -216,7 +216,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
       ) {
         await navigator.share({
           files: [file],
-          title: "ابراهيـم & نســورا",
+          title: "عبـدالرحيم & لُجيـن",
         });
       } else {
         alert(
@@ -439,7 +439,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                       }}
                       className="text-3xl font-bold"
                     >
-                      إبراهيـم & نســورا
+                      عبـدالرحيم & لُجيـن
                     </p>
                   </div>
                 </div>
