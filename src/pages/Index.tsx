@@ -135,114 +135,151 @@ const Index = () => {
                 </span>
               </div>
 
-              {/* الثلاث سطور تحته */}
+              {/* الثلاث سطور تحته (بخلاف الخط العادي) */}
               <p
-                className="font-arabic text-base sm:text-lg opacity-90 "
-                style={{ color: "#5F4F41" }}
+                className="text-sm sm:text-base opacity-90"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
               >
-                بمشاعر مليئة بالفرح والسعادة
+                في العمر أيام يزينها الســـرور
               </p>
 
               <p
-                className="font-arabic text-base sm:text-lg opacity-90 "
-                style={{ color: "#5F4F41" }}
+                className="text-sm sm:text-base opacity-90"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
               >
-                ولأن الفرحة لا تكتمل الا برؤيتكم
+                وسرور هذا اليـــــــــوم مختلف
               </p>
 
               <p
-                className="font-arabic text-base sm:text-lg opacity-90 pb-1"
-                style={{ color: "#5F4F41" }}
+                className="text-sm sm:text-base opacity-90"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
+              >
+                اللّٰه يهني غوالينا بأحلى لياليهم
+              </p>
+
+              <p
+                className="text-sm sm:text-base opacity-90"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
+              >
+                بقلب أم مبتهج ومشاعر مليئة بالحب
+              </p>
+              <p
+                className="text-sm sm:text-base opacity-90 pb-1"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
               >
                 تتـــشرف
               </p>
 
-              {/* زينب الحايك & فاطمة الدويرج */}
+              {/* أسماء الأمهات مع كلمة السيدة فوق كل اسم */}
               <div
-                className="flex items-center justify-center gap-3 text-lg sm:text-xl font-bold py-1"
-                style={{ color: "#5F4F41", fontFamily: "'Almarai', sans-serif" }}
+                className="flex justify-around items-center py-2 text-base sm:text-lg font-bold"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
               >
-                <span>زينب الحايك</span>
-                <span className="text-base font-normal">&</span>
-                <span>فاطمة الدويرج</span>
+                <div className="text-center">
+                  <div className="text-xs font-normal opacity-80 mb-0.5">السيدة</div>
+                  <div>آسية</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs font-normal opacity-80 mb-0.5">السيدة</div>
+                  <div>سمية</div>
+                </div>
               </div> 
 
               {/* السطر السادس */}
              <p
-                className="font-arabic text-sm sm:text-base pt-1"
-                style={{ color: "#5F4F41" }}
+                className="text-sm sm:text-base pt-1"
+                style={{ color: "#5F4F41", fontFamily: "'Cairo', 'Tahoma', sans-serif" }}
               >
-                بدعوتكم لحضور حفل زفاف
+                بدعوتكم لحضور حفل زفاف نجليهما
               </p>
               
               {/* مسافة بين السطرين لإبعاد أسماء العرسان قليلاً إلى الأسفل */}
               <div className="h-4"></div>
 
-              {/* طارق & كادي */}
-              <div className="pt-2 pb-2 flex items-center justify-center gap-2">
+              {/* طارق & كادي مع أسماء الآباء تحتها */}
+              <div className="pt-2 pb-2 flex items-center justify-center gap-4 sm:gap-6">
 
-                <span
-                  className="text-4xl sm:text-5xl"
-                  style={{
-                    fontFamily:
-                      "'IranNastaliq', sans-serif",
-                    color: "#5F4F41",
-                  }}
-                >
-                  إبراهيـم
-                </span>
+                <div className="text-center flex flex-col items-center">
+                  <span
+                    className="text-3xl sm:text-4xl leading-tight"
+                    style={{
+                      fontFamily: "'IranNastaliq', sans-serif",
+                      color: "#5F4F41",
+                    }}
+                  >
+                    عبدالرحيم
+                  </span>
+                  <span
+                    className="text-sm sm:text-base mt-1"
+                    style={{
+                      color: "#5F4F41",
+                      fontFamily: "'Cairo', 'Tahoma', sans-serif",
+                    }}
+                  >
+                    ناقرو
+                  </span>
+                </div>
 
                 <span
                   className="text-2xl"
                   style={{
-                    fontFamily:
-                      "'WaFont', sans-serif",
+                    fontFamily: "'WaFont', sans-serif",
                     color: "#5F4F41",
                   }}
                 >
                   &
                 </span>
 
-                <span
-                  className="text-4xl sm:text-5xl"
-                  style={{
-                    fontFamily:
-                      "'IranNastaliq', sans-serif",
-                    color: "#5F4F41",
-                  }}
-                >
-                  نســـورا
-                </span>
+                <div className="text-center flex flex-col items-center">
+                  <span
+                    className="text-3xl sm:text-4xl leading-tight"
+                    style={{
+                      fontFamily: "'IranNastaliq', sans-serif",
+                      color: "#5F4F41",
+                    }}
+                  >
+                    لُجين
+                  </span>
+                  <span
+                    className="text-sm sm:text-base mt-1"
+                    style={{
+                      color: "#5F4F41",
+                      fontFamily: "'Cairo', 'Tahoma', sans-serif",
+                    }}
+                  >
+                    الحوشبي
+                  </span>
+                </div>
 
               </div>
             </div>
 
             {/* قسم الموقع */}
             <div
-  id="location"
-  className="text-center space-y-0.5 py-1"
->
-  <h3
-    className="font-arabic text-lg sm:text-xl font-bold"
-    style={{ color: "#5F4F41" }}
-  >
-    الموقع
-  </h3>
+              id="location"
+              className="text-center space-y-0.5 py-1"
+            >
+              <h3
+                className="font-arabic text-lg sm:text-xl font-bold"
+                style={{ color: "#5F4F41" }}
+              >
+                الموقع
+              </h3>
 
-  <p
-    className="font-arabic text-base sm:text-lg font-semibold"
-    style={{ color: "#5F4F41" }}
-  >
-    قاعـة سما للأفراح والمناسبات
-  </p>
+              <p
+                className="font-arabic text-base sm:text-lg font-semibold"
+                style={{ color: "#5F4F41" }}
+              >
+                قاعـة سما للأفراح والمناسبات
+              </p>
 
-  <p
-    className="font-arabic text-sm sm:text-base font-medium opacity-90"
-    style={{ color: "#5F4F41" }}
-  >
-    المذنب
-  </p>
-</div>
+              <p
+                className="font-arabic text-sm sm:text-base font-medium opacity-90"
+                style={{ color: "#5F4F41" }}
+              >
+                المذنب
+              </p>
+            </div>
 
             {/* التقويم */}
             <div className="flex flex-col items-center space-y-3">
@@ -385,7 +422,7 @@ const Index = () => {
 
               </div>
 
-              {/* طارق & كادي */}
+              {/* عبدالرحيم & لُجين */}
               <Reveal>
                 <div className="flex items-center justify-center gap-2">
 
@@ -397,7 +434,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    إبراهيـم
+                    عبدالرحيم
                   </span>
 
                   <span
@@ -419,7 +456,7 @@ const Index = () => {
                       color: "#5F4F41",
                     }}
                   >
-                    نســـورا
+                    لُجين
                   </span>
 
                 </div>
@@ -427,13 +464,13 @@ const Index = () => {
 
               {/* غيمة */}
               <Reveal delay={200}>
-  <div
-    className="flex items-center justify-center gap-2 pt-0.5"
-    style={{
-      transform: "translateY(100px)",
-      color: "#5F4F41",
-    }}
-  >
+                <div
+                  className="flex items-center justify-center gap-2 pt-0.5"
+                  style={{
+                    transform: "translateY(100px)",
+                    color: "#5F4F41",
+                  }}
+                >
 
                   <Heart className="w-4 h-4 fill-current text-[#5F4F41]" />
 
