@@ -167,18 +167,28 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
       renderHeight
     );
 
+    // رسم تدرج خلف النص تماماً مثل المعاينة (من الأسفل)
+    const gradient = ctx.createLinearGradient(0, canvas.height - 400, 0, canvas.height);
+    gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
+    gradient.addColorStop(1, "rgba(0, 0, 0, 0.8)");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, canvas.height - 400, canvas.width, 400);
+
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "#FFFFFF";
-    ctx.font = "bold 52px IranNastaliq";
+    // زيادة حجم الخط ليتناسب تماماً مع دقة الكانفاس 1080x1920 ويطابق المعاينة
+    ctx.font = "bold 96px 'IranNastaliq', sans-serif";
 
-    ctx.shadowColor = "rgba(0,0,0,0.45)";
-    ctx.shadowBlur = 10;
+    ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+    ctx.shadowBlur = 15;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 4;
 
     ctx.fillText(
       "عبـدالرحيم & لُجيـن",
       canvas.width / 2,
-      canvas.height - 150
+      canvas.height - 180
     );
 
     ctx.shadowColor = "transparent";
@@ -437,7 +447,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                         fontFamily:
                           "'IranNastaliq', sans-serif",
                       }}
-                      className="text-3xl font-bold"
+                      className="text-4xl font-bold"
                     >
                       عبـدالرحيم & لُجيـن
                     </p>
@@ -474,7 +484,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
 
                       <a
                         href={capturedImage}
-                        download="mohammed-ahood.png"
+                        download="wedding-filter.png"
                         className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-white/20 text-white font-arabic text-sm font-semibold transition-all active:scale-95"
                         style={{
                           background:
@@ -958,7 +968,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </span>
           </button>
 
-          {/* 3. الدائرة البنية في المنتصف بداخلها قلب أبيض كرمز (منظر فقط بدون تأثير) */}
+          {/* 3. الدائرة البنية في المنتصف بداخلها قلب أبيض كرمز */}
           <div className="relative -top-2 flex flex-col items-center justify-center pointer-events-none">
             <div
               className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/40"
