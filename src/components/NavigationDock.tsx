@@ -167,7 +167,6 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
       renderHeight
     );
 
-    // رسم تدرج خلف النص تماماً مثل المعاينة (من الأسفل)
     const gradient = ctx.createLinearGradient(0, canvas.height - 400, 0, canvas.height);
     gradient.addColorStop(0, "rgba(0, 0, 0, 0)");
     gradient.addColorStop(1, "rgba(0, 0, 0, 0.8)");
@@ -177,7 +176,6 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
     ctx.fillStyle = "#FFFFFF";
-    // زيادة حجم الخط ليتناسب تماماً مع دقة الكانفاس 1080x1920 ويطابق المعاينة
     ctx.font = "bold 96px 'IranNastaliq', sans-serif";
 
     ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
@@ -593,7 +591,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                   onClick={() =>
                     setShowRSVP(false)
                   }
-                  className="w-full mt-7 py-3.5 rounded-2xl font-bold"
+                  className="w-full mt-7 py-3.5 rounded-2xl font-bold cursor-pointer"
                   style={{
                     fontFamily:
                       "'Almarai', sans-serif",
@@ -652,7 +650,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                   onClick={() =>
                     setShowRSVP(false)
                   }
-                  className="w-full mt-7 py-3.5 rounded-2xl font-bold"
+                  className="w-full mt-7 py-3.5 rounded-2xl font-bold cursor-pointer"
                   style={{
                     fontFamily:
                       "'Almarai', sans-serif",
@@ -701,7 +699,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                       kind: "form",
                     })
                   }
-                  className="w-full py-3.5 rounded-2xl font-bold"
+                  className="w-full py-3.5 rounded-2xl font-bold cursor-pointer"
                   style={{
                     fontFamily:
                       "'Almarai', sans-serif",
@@ -801,7 +799,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                         kind: "form",
                       });
                     }}
-                    className="flex-1 py-3 rounded-2xl border transition-all flex items-center justify-center gap-1"
+                    className="flex-1 py-3 rounded-2xl border transition-all flex items-center justify-center gap-1 cursor-pointer"
                     style={{
                       fontFamily:
                         "'Almarai', sans-serif",
@@ -829,7 +827,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                         kind: "form",
                       });
                     }}
-                    className="flex-1 py-3 rounded-2xl border transition-all flex items-center justify-center gap-1"
+                    className="flex-1 py-3 rounded-2xl border transition-all flex items-center justify-center gap-1 cursor-pointer"
                     style={{
                       fontFamily:
                         "'Almarai', sans-serif",
@@ -858,7 +856,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                     !rsvpStatus ||
                     rsvpState.kind === "loading"
                   }
-                  className="w-full py-3.5 rounded-2xl font-bold transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
+                  className="w-full py-3.5 rounded-2xl font-bold transition-all active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
                   style={{
                     fontFamily:
                       "'Almarai', sans-serif",
@@ -881,7 +879,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
                   onClick={() =>
                     setShowRSVP(false)
                   }
-                  className="w-full mt-3 py-2 text-sm"
+                  className="w-full mt-3 py-2 text-sm cursor-pointer"
                   style={{
                     fontFamily:
                       "'Almarai', sans-serif",
@@ -946,7 +944,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </span>
           </button>
 
-          {/* 2. كاميرا (تعمل وتفتح الكاميرا) */}
+          {/* 2. كاميرا */}
           <button
             onClick={openCamera}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
@@ -968,7 +966,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </span>
           </button>
 
-          {/* 3. الدائرة البنية في المنتصف بداخلها قلب أبيض كرمز */}
+          {/* 3. الدائرة البنية في المنتصف */}
           <div className="relative -top-2 flex flex-col items-center justify-center pointer-events-none">
             <div
               className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border border-white/40"
@@ -988,8 +986,10 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
           {/* 4. الموقع */}
           <button
             onClick={() => {
-              window.location.href =
-                "https://maps.app.goo.gl/mZBWyUcMKVx184hg6?g_st=iw";
+              window.open(
+                "https://maps.app.goo.gl/mZBWyUcMKVx184hg6?g_st=iw",
+                "_blank"
+              );
             }}
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
           >
