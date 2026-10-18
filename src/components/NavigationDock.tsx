@@ -985,7 +985,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
 
           {/* 4. الموقع (معدل ليصبح رابطاً مباشراً وآمناً للجوالات) */}
           <a
-            href="https://maps.app.goo.gl/mZBWyUcMKVx184hg6?g_st=iw"
+            href="https://www.google.com/maps/search/?api=1&query=قاعة+مون+لايت+جدة"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95 no-underline"
