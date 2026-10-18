@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Heart, Calendar } from "lucide-react";
-import invitationImg from "@/assets/La.jpeg";
+import invitationImg from "@/assets/ii.jpeg";
 import sosImg from "@/assets/Rn.jpeg";
 
 import footerBgImg from "@/assets/96AF05E8-7D83-48B7-B124-4763797873E0.png";
@@ -462,17 +462,20 @@ const Index = () => {
                 </div>
               </Reveal>
 
-              {/* غيمة */}
+                            {/* غيمة */}
               <Reveal delay={200}>
                 <div
                   className="flex items-center justify-center gap-2 pt-0.5"
                   style={{
-                    transform: "translateY(100px)",
-                    color: "#5F4F41",
+                    transform: "translate(20px, 100px)",
+                    color: "#837F7B",
                   }}
                 >
 
-                  <Heart className="w-4 h-4 fill-current text-[#5F4F41]" />
+                  <Heart
+                    className="w-4 h-4 fill-current"
+                    style={{ color: "#837F7B" }}
+                  />
 
                   <span className="font-arabic text-xs sm:text-sm font-semibold">
 
@@ -482,7 +485,7 @@ const Index = () => {
                       rel="noopener noreferrer"
                       className="underline underline-offset-4 font-bold hover:opacity-80 transition-opacity"
                       style={{
-                        color: "#5F4F41",
+                        color: "#837F7B",
                       }}
                     >
                       غيمة
