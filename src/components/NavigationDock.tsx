@@ -176,7 +176,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
     ctx.shadowBlur = 10;
 
     ctx.fillText(
-      "إبراهيـم & نســورا",
+      "عبـدالرحيم & لُجيـن",
       canvas.width / 2,
       canvas.height - 150
     );
