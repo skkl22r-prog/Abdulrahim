@@ -983,7 +983,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </div>
           </div>
 
-          {/* 4. الموقع */}
+          {/* 4. الموقع (تم تحسينه ليعمل بثبات على الجوالين بدون مشاكل) */}
           <button
             onClick={() => {
               window.open(
