@@ -983,15 +983,12 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             </div>
           </div>
 
-          {/* 4. الموقع (تم تحسينه ليعمل بثبات على الجوالين بدون مشاكل) */}
-          <button
-            onClick={() => {
-              window.open(
-                "https://maps.app.goo.gl/mZBWyUcMKVx184hg6?g_st=iw",
-                "_blank"
-              );
-            }}
-            className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95"
+          {/* 4. الموقع (معدل ليصبح رابطاً مباشراً وآمناً للجوالات) */}
+          <a
+            href="https://maps.app.goo.gl/mZBWyUcMKVx184hg6?g_st=iw"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex flex-col items-center justify-center gap-1 cursor-pointer transition-transform active:scale-95 no-underline"
           >
             <MapPin
               className="w-5 h-5"
@@ -1008,7 +1005,7 @@ const NavigationDock = ({ active }: NavigationDockProps) => {
             >
               الموقع
             </span>
-          </button>
+          </a>
 
           {/* 5. تأكيد الحضور */}
           <button
