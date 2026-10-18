@@ -6,7 +6,7 @@ interface EventItem {
 }
 
 const events: EventItem[] = [
-  { time: "8:30 PM", title: "الاستقبال" },
+  { time: "9:00 PM", title: "الاستقبال" },
  { time: "12:00 AM", title: "الزفة" },
   //{ time: "12:00 AM", title: "العشاء" },
 ];
